@@ -1,0 +1,78 @@
+public class sortAlgo {
+    public static void main(String[] args) {
+        int[] array= {2,3,4,3,5,7,5,3,4,6};
+       array= mergesort(array);
+        for(int zahl: array){
+            System.out.println(zahl);
+        }
+        
+    }
+    public static int[] mergesort(int[] array){
+        
+        if(array.length<2){
+                return array;
+        }
+        
+        int mitteArray= array.length/2;
+         int endeLinkeArray;
+         int endeRechteArray;
+         int startRechteArray;
+        int startLinkeArray=0;
+        if(array.length%2==0){
+         startRechteArray=mitteArray;
+         endeLinkeArray=mitteArray-1;
+         endeRechteArray=array.length-1;}
+        else{
+         startRechteArray=mitteArray+1;
+         endeLinkeArray=mitteArray;
+         endeRechteArray=array.length-1;
+        }
+            
+        
+        
+        int[] linkeArray=copyToNewArray(array,startLinkeArray,endeLinkeArray);
+        int[] rechteArray=copyToNewArray(array,startRechteArray,endeRechteArray);
+        
+        return merge(mergesort(linkeArray),mergesort(rechteArray));  
+        
+    
+        
+        
+        
+    }
+    private static int[] merge(int[] array1, int[] array2){
+        int[] mergedArray= new int[array1.length+array2.length];
+        int pointerArray1=0;
+        int pointerArray2=0;
+        for(int pointerMergedArray=0; pointerMergedArray<mergedArray.length;pointerMergedArray++){
+                
+            if(pointerArray1<array1.length && array1[pointerArray1]<=array2[pointerArray2]) {
+            mergedArray[pointerMergedArray]=array1[pointerArray1]; pointerArray1++;
+                }
+                if(pointerArray2<array2.length && array1[pointerArray1]>array2[pointerArray2]){
+                    mergedArray[pointerMergedArray]=array2[pointerArray2]; pointerArray2++;
+                }
+else{
+pointerArray1++;
+pointerArray2++;
+}
+            
+        }
+        return mergedArray;
+        
+    }
+  
+    private static int[] copyToNewArray(int[] array, int start, int end){
+        int laenge= 1+(end-start);
+        int[] newArray;
+        if(laenge<1) throw new IllegalArgumentException("start und ende falsch");
+        newArray= new int[laenge];
+        int newArrayIndex=0;
+        for(int pointerArray=start; pointerArray<=end;pointerArray++){
+            newArray[newArrayIndex]=array[pointerArray];
+            newArrayIndex++;
+        }
+        return newArray;
+    }
+    
+}
