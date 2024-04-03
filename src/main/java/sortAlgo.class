@@ -74,5 +74,54 @@ pointerArray2++;
         }
         return newArray;
     }
+public static void quicksort(int[] array){
+    helpQuickSort(array, 0,array.length-1,-1);
+    
+    
+    
+  }
+  private static void helpQuickSort(int[] array, int startIndex, int endIndex,int helpIndex){
+        
+        int laenge=1+(endIndex-startIndex);
+        int i=helpIndex;
+            int tmp;
+        
+         if(laenge>1){
+           
+            
+            for(int j=startIndex;j<=endIndex;j++){
+               if(j==endIndex){
+                i++;
+                tmp=array[j];
+              array[j]=array[i];
+              array[i]=tmp;
+              
+                 break;
+               }
+            if(array[endIndex]>array[j]){
+              i++;
+              tmp=array[j];
+              array[j]=array[i];
+              array[i]=tmp;
+              
+              }
+             
+            }
+      }
+      if(1+(laenge/2)>1){
+      
+      int linkeStartIndex=startIndex;
+      int linkeEndIndex=i-1;
+      int linkeHelpIndex=startIndex-1;
+      int rechteStartIndex= i+1;
+      int rechteEndIndex=endIndex;
+      int rechteHelpIndex=i;
+      helpQuickSort(array,linkeStartIndex,linkeEndIndex,linkeHelpIndex);
+      helpQuickSort(array,rechteStartIndex,rechteEndIndex,rechteHelpIndex);
+      }
+    
+    
+  }
+  
     
 }
